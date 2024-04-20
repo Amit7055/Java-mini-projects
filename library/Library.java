@@ -17,16 +17,17 @@ public class Library {
 	}
 
 	public void removeBook(String bookId) {
-		books.remove(bookId);
+		if (books.containsKey(bookId)) {
+			books.remove(bookId);
+			System.out.println("Remove successfull");
+		} else {
+			System.out.println("Unable to find book Or Enter correct title...");
+		}
 	}
 
 	public void updateBook(String bookId, Book updatedBook) {
-		if (books.containsKey(bookId)) {
 			books.put(bookId, updatedBook);
 			System.out.println("Update successfull");
-		} else {
-			System.out.println("Unable to find book...");
-		}
 	}
 
 	public Book searchBookByTitle(String title) {
@@ -98,6 +99,8 @@ public class Library {
 			System.out.println("Author    : " + book.getAuthor());
 			System.out.println("Category  : " + book.getCategory());
 			System.out.println("Available : " + book.isAvailability());
+
+			System.out.println();
 		}
 	}
 
