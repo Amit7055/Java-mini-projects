@@ -21,7 +21,12 @@ public class Library {
 	}
 
 	public void updateBook(String bookId, Book updatedBook) {
-		books.put(bookId, updatedBook);
+		if (books.containsKey(bookId)) {
+			books.put(bookId, updatedBook);
+			System.out.println("Update successfull");
+		} else {
+			System.out.println("Unable to find book...");
+		}
 	}
 
 	public Book searchBookByTitle(String title) {
@@ -89,8 +94,10 @@ public class Library {
 	public void displayAllBooks() {
 		System.out.println("All Books:");
 		for (Book book : books.values()) {
-			System.out.println(book.getTitle() + " by " + book.getAuthor() + " - Category: " + book.getCategory()
-					+ ", Available: " + book.isAvailability());
+			System.out.println("Title     : " + book.getTitle());
+			System.out.println("Author    : " + book.getAuthor());
+			System.out.println("Category  : " + book.getCategory());
+			System.out.println("Available : " + book.isAvailability());
 		}
 	}
 
