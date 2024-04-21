@@ -6,11 +6,19 @@ public class Input {
 
 	static int id = 1;
 
-	public static Member name(String name) {
-		int idd = id++;
-		String memberId = "M00" + idd;
-		Member member = new Member(name, memberId);
-		return member;
+	public static Member name() {
+		Scanner scanner = new Scanner(System.in);
+		Validation validation = new Validation();
+		System.out.println("Enter Name of Member");
+		String name = scanner.nextLine();
+		if (validation.checkName(name)) {
+			int idd = id++;
+			String memberId = "M00" + idd;
+			Member member = new Member(name, memberId);
+			return member;
+		} else {
+			return null;
+		}
 	}
 
 	public static Book getData() {
@@ -36,3 +44,4 @@ public class Input {
 	}
 
 }
+
