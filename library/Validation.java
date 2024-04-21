@@ -38,12 +38,12 @@ public class Validation {
 		}
 	}
 
-	public boolean name(String name) {
-		if (name.matches("[A-Za-z]*")) {
+	public boolean checkName(String name) {
+		if (name.matches("[A-Za-z]+") || name.matches("[A-Z]+") || name.matches("[A-Z]+")) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
+	
 }
