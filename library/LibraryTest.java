@@ -1,5 +1,4 @@
 package library;
-package miniproject;
 
 import java.util.ArrayList;
 import java.util.Scanner;
