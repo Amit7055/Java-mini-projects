@@ -26,12 +26,24 @@ public class Library {
 	}
 
 	public void updateBook(String bookId, Book updatedBook) {
+		boolean test = books.containsKey(bookId);
+		if (test) {
 			books.put(bookId, updatedBook);
 			System.out.println("Update successfull");
+		} else {
+			System.out.println("Unsuccessfull");
+		}
 	}
 
 	public Book searchBookByTitle(String title) {
-		return books.get(title);
+		boolean test = books.containsKey(title);
+		if (test) {
+			System.out.println("Book found");
+			return books.get(title);
+		} else {
+			System.out.println("Book not found");
+			return null;
+		}
 	}
 
 	public ArrayList<Book> searchBookByAuthor(String author) {
@@ -59,36 +71,57 @@ public class Library {
 	}
 
 	public void removeMember(String memberId) {
-		members.remove(memberId);
+		boolean test = members.containsKey(memberId);
+		if (test) {
+			members.remove(memberId);
+			System.out.println("Update successfull");
+		} else {
+			System.out.println("Enter Valid Member ID");
+		}
 	}
 
 	public void updateMember(String memberId, Member updatedMember) {
-		members.put(memberId, updatedMember);
+		if (members.containsKey(memberId)) {
+			// Get the old member associated with memberId
+			Member oldMember = members.get(memberId);
+
+			// Remove the old key-value pair from the HashMap
+			members.remove(memberId);
+
+			// Add the new key-value pair with updated memberId
+			members.put(updatedMember.getMemberId(), updatedMember);
+		} else {
+			System.out.println("Member Id no found");
+		}
 	}
 
 	public Member getMemberById(String memberId) {
 		return members.get(memberId);
 	}
 
-	public void borrowBook(String memberId, String bookId) {
+	public boolean borrowBook(String memberId, String bookId) {
 		Member member = members.get(memberId);
 		Book book = books.get(bookId);
 		if (member != null && book != null && book.isAvailability()) {
 			member.borrowBook(book);
 			book.setAvailability(false);
+			return true;
 		} else {
-			System.out.println("Invalid member ID or book ID, or book is not available.");
+			return false;
 		}
 	}
 
-	public void returnBook(String memberId, String bookId) {
+	public boolean returnBook(String memberId, String bookId) {
 		Member member = members.get(memberId);
 		Book book = books.get(bookId);
 		if (member != null && book != null && !book.isAvailability()) {
 			member.returnBook(book);
 			book.setAvailability(true);
+
+			return true;
 		} else {
-			System.out.println("Invalid member ID or book ID, or book is already available.");
+
+			return false;
 		}
 	}
 
